@@ -21,6 +21,23 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'devise', '~> 4.2'
+gem "simple_form", ">= 5.0.0"
+#gem 'simple_form', '~> 3.5'
+gem 'country_select', '~> 4.0'
+gem 'flag-icons-rails'
+gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist'
+gem 'countries', require: 'countries/global'
+#gem 'font-awesome-rails' # Font-awesome icon
+gem 'font-awesome-sass', '~> 5.11.2'
+gem 'friendly_id', '~> 5.2', '>= 5.2.5'
+gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
+gem 'mini_magick', '~> 4.9', '>= 4.9.2'
+gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
+gem 'jquery-rails'
+gem 'carrierwave', '~> 2.0'
+gem 'country_select', '~> 4.0'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

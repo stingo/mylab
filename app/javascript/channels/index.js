@@ -3,3 +3,18 @@
 
 const channels = require.context('.', true, /_channel\.js$/)
 channels.keys().forEach(channels)
+
+
+
+// notifications
+document.addEventListener("turbolinks:load", function() {
+
+  var notification = document.querySelector('.global-notification');
+
+  if(notification) {
+    window.setTimeout(function() {
+      notification.style.display = "none";
+    }, 4000);
+  }
+
+});
