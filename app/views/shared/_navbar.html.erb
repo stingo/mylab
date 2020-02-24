@@ -1,5 +1,5 @@
 <% if current_user.is_a?(GuestUser) %>
-  <%= render 'shared/guest_nav'%>
+  <%= render "shared/guest_nav" %>
 <% else %>
-  <%= render 'shared/user_nav'%>
+  <%= render "shared/user_nav" %>
 <% end %>

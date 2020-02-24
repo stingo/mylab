@@ -42,6 +42,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 group :development, :test do
   gem "annotate"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "erb_lint"
   gem "pry-rails"
   gem "rubocop"
   gem "rubocop-performance"
