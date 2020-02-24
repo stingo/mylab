@@ -4,19 +4,15 @@ class ApplicationController < ActionController::Base
 
   include CurrentUserConcern
 
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-    user_params.permit(:username, :first_name, :last_name, :email,
-     :password, :password_confirmation )
-  end
+      user_params.permit(:username, :first_name, :last_name, :email,
+                         :password, :password_confirmation)
+    end
 
-  devise_parameter_sanitizer.permit(:account_update) do |user_params|
-    user_params.permit(:username, :first_name, :last_name, :email,
-     :password, :password_confirmation )
-  end
+    devise_parameter_sanitizer.permit(:account_update) do |user_params|
+      user_params.permit(:username, :first_name, :last_name, :email,
+                         :password, :password_confirmation)
+    end
 end
-
-
-
 end
