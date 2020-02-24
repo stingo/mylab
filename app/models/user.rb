@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def should_generate_new_friendly_id?
     username_changed?
- end
+  end
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
