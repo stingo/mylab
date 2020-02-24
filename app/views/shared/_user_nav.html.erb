@@ -12,17 +12,13 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          $ USD
-          <!--default currency by current user's location-->
-        </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Pound steling (GBP - £)</a>
-          <a class="dropdown-item" href="#">Chinese yaun (CYN - ¥)</a>
-          <a class="dropdown-item" href="#">Ghanaian cedi (GHS - ¢)</a>
+          <%= link_to "English", url_for(locale: 'en' ), class: "dropdown-item" %>
+          <%= link_to "Spanish", url_for(locale: 'es' ), class: "dropdown-item" %>
+          <%= link_to "Japanese", url_for(locale: 'ja' ), class: "dropdown-item" %>
         </div>
       </li>
-
     </ul>
 
     <div style="margin-right: 100px">
