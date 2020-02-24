@@ -1,60 +1,56 @@
-
 <!------ Include the above in your HEAD tag ---------->
-
 <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,800,900%7cRaleway:300,400,500,600,700" rel="stylesheet">
 <body>
-    <section class="blog-me pt-100 pb-100" id="blog">
-         <div class="container">
-            <div class="row">
-               <div class="col-xl-6 mx-auto text-center">
-                  <div class="section-title mb-100">
-                     <p>marketplace</p>
-                     <h4>latest Listings</h4>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
+  <section class="blog-me pt-100 pb-100" id="blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 mx-auto text-center">
+          <div class="section-title mb-100">
+            <p>marketplace</p>
+            <h4>latest Listings</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
 
-<% @ads.each do |ad| %>
-               <div class="col-lg-4 col-md-6">
-                  <!-- Single Blog -->
-                  <div class="single-blog">
-                     <div class="blog-img">
-                        <img src="http://infinityflamesoft.com/html/abal-preview/assets/img/blog/blog1.jpg" alt="">
-                        <div class="post-category">
-                           <%= link_to ad.user.full_name.titleize, user_path(ad.user) %>
-                        </div>
-                     </div>
-                     <div class="blog-content">
-                        <div class="blog-title">
-                           <h4><%= link_to ad.title.titleize, ad_path(ad) %></h4>
+        <% @ads.each do |ad| %>
+          <div class="col-lg-4 col-md-6">
+            <!-- Single Blog -->
+            <div class="single-blog">
+              <div class="blog-img">
+                <img src="http://infinityflamesoft.com/html/abal-preview/assets/img/blog/blog1.jpg" alt="">
+                <div class="post-category">
+                  <%= link_to ad.user.full_name.titleize, user_path(ad.user) %>
+                </div>
+              </div>
+              <div class="blog-content">
+                <div class="blog-title">
+                  <h4><%= link_to ad.title.titleize, ad_path(ad) %></h4>
 
-                        </div>
-                        <p><%= truncate(ad.description, length: 75 ) %></p>
-                        
-                        <a href="#" class="box_btn"><%= number_to_currency(ad.price) %></a>
+                </div>
+                <p><%= truncate(ad.description, length: 75 ) %></p>
 
-                        <%= link_to new_ad_path, turbolinks: true, :class => "dropdown-item blu"   do %>
-                              <i class="fa fa-edit"></i>&nbspNew Ad
-                               <% end %>  
+                <a href="#" class="box_btn"><%= number_to_currency(ad.price) %></a>
 
-                         <% if signed_in? and current_user == ad.user || current_user.admin?  %>
+                <%= link_to new_ad_path, turbolinks: true, :class => "dropdown-item blu" do %>
+                <i class="fa fa-edit"></i>&nbspNew Ad
+              <% end %>
 
-<%= link_to edit_ad_path(ad), turbolinks: true, :class => "dropdown-item blu"   do %>
-                              <i class="fa fa-edit"></i>&nbspEdit Ad
-                               <% end %>  
+              <% if signed_in? and current_user == ad.user || current_user.admin?  %>
 
-                         <% end %>
-                     </div>
-                  </div>
+                <%= link_to edit_ad_path(ad), turbolinks: true, :class => "dropdown-item blu" do %>
+                <i class="fa fa-edit"></i>&nbspEdit Ad
+              <% end %>
 
-               </div>
+            <% end %>
+          </div>
+        </div>
 
+      </div>
 
-<% end %>
+    <% end %>
 
-
-            </div>
-         </div>
-      </section>
+  </div>
+</div>
+</section>
 </body>
