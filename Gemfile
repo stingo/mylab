@@ -36,7 +36,6 @@ gem 'mini_magick', '~> 4.9', '>= 4.9.2'
 gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
 gem 'jquery-rails'
 gem 'carrierwave', '~> 2.0'
-gem 'country_select', '~> 4.0'
 
 
 # Use Active Storage variant
