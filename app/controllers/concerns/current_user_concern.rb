@@ -3,7 +3,7 @@ module CurrentUserConcern
 
   def current_user
     super || guest_user
-    end
+  end
 
   def guest_user
     guest = GuestUser.new
@@ -11,5 +11,5 @@ module CurrentUserConcern
     guest.last_name = "User"
     guest.email = "guest@example.com"
     guest
-    end
+  end
 end
