@@ -1,0 +1,103 @@
+# This is the configuration used to check the rubocop source code.
+# See https://github.com/bbatsov/rubocop/blob/master/config/default.yml for options
+require:
+  - rubocop-performance
+  - rubocop-rails
+AllCops:
+  TargetRubyVersion: 2.6
+  DisplayCopNames: true
+  Include:
+    - 'app/**/*.rb'
+    - 'config/**/*.rb'
+    - 'db/migrate/**/*.rb'
+    - 'db/seeds.rb'
+    - 'lib/**/*.rb'
+    - 'lib/**/*.rake'
+    - 'spec/**/*.rb'
+    - 'config.ru'
+    - 'Gemfile'
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'node_modules/**/*'
+    - 'db/schema.rb'
+    - 'bin/**/*'
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Lint/UnusedBlockArgument:
+  Enabled: true
+Metrics/AbcSize:
+  Max: 35
+Layout/LineLength:
+  Max: 160
+Metrics/ClassLength:
+  Max: 150
+Metrics/MethodLength:
+  Max: 25
+Metrics/ModuleLength:
+  Max: 120
+  Exclude:
+    - 'spec/**/*_spec.rb'
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - is_
+  Exclude:
+    - 'spec/**/*'
+Rails:
+  Enabled: true
+Rails/BulkChangeTable:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/concerns/**/*.rb'
+Rails/Output:
+  Enabled: false
+Rails/OutputSafety:
+  Enabled: true
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+Style/Documentation:
+  Enabled: false
+Style/FormatStringToken:
+  EnforcedStyle: template
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Style/LambdaCall:
+  EnforcedStyle: call
+  Exclude:
+    - 'app/**/*.jbuilder'
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/SymbolArray:
+  MinSize: 3
+Style/WordArray:
+  MinSize: 3
+Metrics/BlockLength:
+  Exclude:
+    - 'app/rails_admin_models/*.rb'
+    - 'app/views/**/*'
+    - 'config/**/*.rb'
+    - 'db/**/*.rb'
+    - 'lib/**/*.rake'
+    - 'spec/**/*'
+Bundler/OrderedGems:
+  Enabled: true

@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
-  before_action :authenticate_user!, :except => [:index, :show]
-  before_action :set_ad, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_ad, only: %i[show edit update destroy]
 
   # GET /ads
   # GET /ads.json
@@ -10,8 +10,7 @@ class AdsController < ApplicationController
 
   # GET /ads/1
   # GET /ads/1.json
-  def show
-  end
+  def show; end
 
   # GET /ads/new
   def new
@@ -26,11 +25,11 @@ class AdsController < ApplicationController
   # POST /ads
   # POST /ads.json
   def create
-   @ad = current_user.ads.build(ad_params)
+    @ad = current_user.ads.build(ad_params)
 
     respond_to do |format|
       if @ad.save
-        format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
+        format.html { redirect_to @ad, notice: "Ad was successfully created." }
         format.json { render :show, status: :created, location: @ad }
       else
         format.html { render :new }
@@ -42,11 +41,11 @@ class AdsController < ApplicationController
   # PATCH/PUT /ads/1
   # PATCH/PUT /ads/1.json
   def update
-     @ad = Ad.friendly.find(params[:id])
+    @ad = Ad.friendly.find(params[:id])
 
     respond_to do |format|
       if @ad.update(ad_params)
-        format.html { redirect_to @ad, notice: 'Ad was successfully updated.' }
+        format.html { redirect_to @ad, notice: "Ad was successfully updated." }
         format.json { render :show, status: :ok, location: @ad }
       else
         format.html { render :edit }
@@ -60,19 +59,20 @@ class AdsController < ApplicationController
   def destroy
     @ad.destroy
     respond_to do |format|
-      format.html { redirect_to ads_url, notice: 'Ad was successfully destroyed.' }
+      format.html { redirect_to ads_url, notice: "Ad was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ad
-      @ad = Ad.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ad_params
-      params.require(:ad).permit(:title, :description, :price, :slug)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ad
+    @ad = Ad.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ad_params
+    params.require(:ad).permit(:title, :description, :price, :slug)
+  end
 end

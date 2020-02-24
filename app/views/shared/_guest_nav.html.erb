@@ -1,4 +1,4 @@
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,14 +7,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span></a>
       </li>
-
-
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          $ USD <!--default currency by current user's location-->
+          $ USD
+          <!--default currency by current user's location-->
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Pound steling (GBP - £)</a>
@@ -25,54 +25,39 @@
 
     </ul>
 
+    <div style="margin-right: 100px">
+      <ul class=" navbar-nav ">
 
+        <li class="nav-item dropdown dropdown-menu-left">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.full_name.titleize %>
+          </a>
 
-      <div style="margin-right: 100px">  
-        <ul class=" navbar-nav " >
+        </li>
 
-      <li class="nav-item dropdown dropdown-menu-left">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= current_user.full_name.titleize %>
-        </a>
-       
+        <!-- Desktop Button Login-->
+        <%= link_to "Log In", new_user_session_path, turbolinks: true, :class => "btn btn-sm d-none d-lg-inline-block btn btn-outline-white ml-auto" %>
+        <!-- Mobile button Login-->
+        <li class="nav-item d-sm-none">
+          <%= link_to "Log In", new_user_session_path, turbolinks: true , :class => "nav-link" %>
+
+        </li>
+
+        <!-- Desktop Button Sign up -->
+
+        <%= link_to new_user_registration_path, turbolinks: true, :class => "btn btn-sm d-none d-lg-inline-block btn-warning ml-auto" do %>
+        Sign Up
+      <% end %>
+      <!-- Mobile button Sign up -->
+      <li class="nav-item d-sm-none">
+        <%= link_to "Sign up", new_user_registration_path, turbolinks: true , :class => " nav-link" %>
       </li>
-
-
-                    <!-- Desktop Button  Login-->
-                   <%= link_to "Log In", new_user_session_path, turbolinks: true, :class => "btn btn-sm d-none d-lg-inline-block btn btn-outline-white ml-auto" %>
-                    <!-- Mobile button  Login-->
-                       <li class="nav-item d-sm-none">
-                <%= link_to "Log In", new_user_session_path, turbolinks: true , :class => "nav-link" %>
-                             
-                      </li> 
-
-
-
-
-
-                    <!-- Desktop Button Sign up -->
-
-                       <%= link_to new_user_registration_path, turbolinks: true, :class => "btn btn-sm d-none d-lg-inline-block btn-warning ml-auto" do %>
-                          Sign Up
-                        <% end %>
-                    <!-- Mobile button Sign up -->
-                      <li class="nav-item d-sm-none">
-                    <%= link_to "Sign up", new_user_registration_path, turbolinks: true , :class => " nav-link" %>
-                      </li>
-
-
-  </ul>
-
-</div>
 
     </ul>
 
-
-
-
-
-
-
-
   </div>
+
+</ul>
+
+</div>
 </nav>
