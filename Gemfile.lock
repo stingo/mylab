@@ -131,6 +131,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.9.0)
+      devise (>= 4.7.1)
     erb_lint (0.0.30)
       activesupport
       better_html (~> 1.0.7)
@@ -368,6 +370,7 @@ DEPENDENCIES
   country_select (~> 4.0)
   devise (~> 4.2)
   devise-bootstrapped!
+  devise-i18n
   erb_lint
   flag-icons-rails
   font-awesome-sass (~> 5.11.2)

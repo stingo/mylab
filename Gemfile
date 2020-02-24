@@ -36,6 +36,7 @@ gem "friendly_id", "~> 5.2", ">= 5.2.5"
 gem "gravatar_image_tag", github: "mdeering/gravatar_image_tag"
 gem "jquery-rails"
 gem "mini_magick", "~> 4.9", ">= 4.9.2"
+gem 'devise-i18n'
 
 gem "bootsnap", ">= 1.4.2", require: false
 
