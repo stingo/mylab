@@ -31,12 +31,12 @@ gem "impressionist", git: "https://github.com/charlotte-ruby/impressionist"
 # gem 'font-awesome-rails' # Font-awesome icon
 gem "carrierwave", "~> 2.0"
 gem "devise-bootstrapped", github: "excid3/devise-bootstrapped", branch: "bootstrap4"
+gem "devise-i18n"
 gem "font-awesome-sass", "~> 5.11.2"
 gem "friendly_id", "~> 5.2", ">= 5.2.5"
 gem "gravatar_image_tag", github: "mdeering/gravatar_image_tag"
 gem "jquery-rails"
 gem "mini_magick", "~> 4.9", ">= 4.9.2"
-gem 'devise-i18n'
 
 gem "bootsnap", ">= 1.4.2", require: false
 
