@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
       user_params.permit(:username, :first_name, :last_name, :email,
                          :password, :password_confirmation)
     end
+
+    set_locale
   end
 
   def save_currency
