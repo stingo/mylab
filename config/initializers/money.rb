@@ -1,5 +1,5 @@
 require "money"
-require 'eu_central_bank'
+require "eu_central_bank"
 
 MoneyRails.configure do |config|
   config.default_currency = :usd

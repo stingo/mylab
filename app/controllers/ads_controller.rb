@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :save_currency]
+  before_action :authenticate_user!, except: %i[index show save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
 
   # GET /ads
