@@ -19,13 +19,6 @@ class ApplicationController < ActionController::Base
     set_locale
   end
 
-  def save_currency
-    session[:currency] = params[:currency]
-    respond_to do |format|
-      format.html { redirect_to :back }
-    end
-  end
-
   private
 
   def set_locale

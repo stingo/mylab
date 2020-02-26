@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
 
   # GET /ads
@@ -61,6 +61,13 @@ class AdsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to ads_url, notice: "Ad was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def save_currency
+    session[:currency] = params[:currency]
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
     end
   end
 
