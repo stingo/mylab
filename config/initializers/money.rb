@@ -1,12 +1,9 @@
 require "money"
-require "money/bank/google_currency"
+require 'eu_central_bank'
 
 MoneyRails.configure do |config|
   config.default_currency = :usd
 
-  Money::Bank::GoogleCurrency::SERVICE_HOST = "finance.google.com".freeze
-
-  # set default bank to instance of GoogleCurrency
-  Money::Bank::GoogleCurrency.ttl_in_seconds = 86_400
-  config.default_bank = Money::Bank::GoogleCurrency.new
+  # set default bank to instance of EuCentralBank
+  Money.default_bank = EuCentralBank.new
 end
