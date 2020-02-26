@@ -12,7 +12,6 @@
         </div>
       </div>
       <div class="row">
-
         <% @ads.each do |ad| %>
           <div class="col-lg-4 col-md-6">
             <!-- Single Blog -->
@@ -26,22 +25,19 @@
               <div class="blog-content">
                 <div class="blog-title">
                   <h4><%= link_to ad.title.titleize, ad_path(ad) %></h4>
-
                 </div>
                 <p><%= truncate(ad.description, length: 75) %></p>
 
-                <a href="#" class="box_btn"><%= number_to_currency(ad.price) %></a>
+                <a href="#" class="box_btn"><%= converted_price(ad.price) %></a>
 
                 <%= link_to new_ad_path, turbolinks: true, class: "dropdown-item blu" do %>
-                <i class="fa fa-edit"></i>&nbspNew Ad
+                <i class="fa fa-edit"></i> New Ad
               <% end %>
 
               <% if signed_in? and current_user == ad.user || current_user.admin? %>
-
                 <%= link_to edit_ad_path(ad), turbolinks: true, class: "dropdown-item blu" do %>
-                <i class="fa fa-edit"></i>&nbspEdit Ad
+                <i class="fa fa-edit"></i> Edit Ad
               <% end %>
-
             <% end %>
           </div>
         </div>
