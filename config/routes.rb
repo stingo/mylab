@@ -5,6 +5,6 @@ Rails.application.routes.draw do
     resources :users
     resources :articles
     root "ads#index"
-    post "/controller/save_currency", to: "controller#save_currency"
+    post "ads/save_currency", to: "ads#save_currency"
   end
 end
