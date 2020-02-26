@@ -18,13 +18,14 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "google_currency"
 gem "jbuilder", "~> 2.7"
-gem "json"
-gem "money"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "devise", "~> 4.2"
+gem "json"
+gem "money-rails"
+gem "multi_json"
 gem "simple_form", ">= 5.0.0"
 # gem 'simple_form', '~> 3.5'
 gem "countries", require: "countries/global"
