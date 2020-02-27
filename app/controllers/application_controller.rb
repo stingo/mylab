@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
                          :password, :password_confirmation)
     end
 
-    set_locale
+
   end
 
   private

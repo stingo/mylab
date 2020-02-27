@@ -26,6 +26,7 @@ class AdsController < ApplicationController
   # POST /ads.json
   def create
     @ad = current_user.ads.build(ad_params)
+    @ad.price_cents = params[:ad][:price].to_money.cents
 
     respond_to do |format|
       if @ad.save
@@ -80,6 +81,6 @@ class AdsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ad_params
-    params.require(:ad).permit(:title, :description, :price, :slug)
+    params.require(:ad).permit(:title, :description, :price, :price_currency, :slug)
   end
 end
