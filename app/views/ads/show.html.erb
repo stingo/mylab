@@ -12,7 +12,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= number_to_currency(@ad.price) %>
+  <%= converted_price(@ad.price) %>
 </p>
 
 <%= link_to "Edit", edit_ad_path(@ad) %>

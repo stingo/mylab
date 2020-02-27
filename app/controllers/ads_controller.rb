@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
 
   # GET /ads
@@ -26,6 +26,7 @@ class AdsController < ApplicationController
   # POST /ads.json
   def create
     @ad = current_user.ads.build(ad_params)
+    @ad.price_cents = params[:ad][:price].to_money.cents
 
     respond_to do |format|
       if @ad.save
@@ -64,6 +65,13 @@ class AdsController < ApplicationController
     end
   end
 
+  def save_currency
+    session[:currency] = params[:currency]
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -73,6 +81,6 @@ class AdsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ad_params
-    params.require(:ad).permit(:title, :description, :price, :slug)
+    params.require(:ad).permit(:title, :description, :price, :price_currency, :slug)
   end
 end

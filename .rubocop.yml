@@ -64,12 +64,6 @@ Rails/UnknownEnv:
     - development
     - test
     - staging
-Style/HashEachMethods:
-  Enabled: false
-Style/HashTransformKeys:
-  Enabled: false
-Style/HashTransformValues:
-  Enabled: false
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*_spec.rb'

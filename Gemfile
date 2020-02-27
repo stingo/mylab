@@ -16,12 +16,17 @@ gem "webpacker", "~> 4.0"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem "emoji_flag"
+gem "eu_central_bank"
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "devise", "~> 4.2"
+gem "json"
+gem "money-rails"
+gem "multi_json"
 gem "simple_form", ">= 5.0.0"
 # gem 'simple_form', '~> 3.5'
 gem "countries", require: "countries/global"
@@ -31,6 +36,7 @@ gem "impressionist", git: "https://github.com/charlotte-ruby/impressionist"
 # gem 'font-awesome-rails' # Font-awesome icon
 gem "carrierwave", "~> 2.0"
 gem "devise-bootstrapped", github: "excid3/devise-bootstrapped", branch: "bootstrap4"
+gem "devise-i18n"
 gem "font-awesome-sass", "~> 5.11.2"
 gem "friendly_id", "~> 5.2", ">= 5.2.5"
 gem "gravatar_image_tag", github: "mdeering/gravatar_image_tag"
