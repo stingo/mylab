@@ -12,9 +12,9 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= "#{t 'language_name'} #{EmojiFlag.new(I18n.locale)}" %></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to "English", url_for(locale: "en"), class: "dropdown-item" %>
-          <%= link_to "Spanish", url_for(locale: "es"), class: "dropdown-item" %>
-          <%= link_to "Japanese", url_for(locale: "ja"), class: "dropdown-item" %>
+          <%= link_to "English #{EmojiFlag.new("EN")}", url_for(locale: "en"), class: "dropdown-item" %>
+          <%= link_to "Spanish #{EmojiFlag.new("ES")}", url_for(locale: "es"), class: "dropdown-item" %>
+          <%= link_to "Japanese #{EmojiFlag.new("JA")}", url_for(locale: "ja"), class: "dropdown-item" %>
         </div>
       </li>
       <% unless request.env['PATH_INFO'].include? "login" %>
