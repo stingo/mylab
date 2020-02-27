@@ -10,7 +10,7 @@
         <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= "#{t "language_name"} #{EmojiFlag.new(I18n.locale)}" %></a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= "#{t 'language_name'} #{EmojiFlag.new(I18n.locale)}" %></a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <%= link_to "English", url_for(locale: "en"), class: "dropdown-item" %>
           <%= link_to "Spanish", url_for(locale: "es"), class: "dropdown-item" %>
