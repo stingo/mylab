@@ -1,6 +1,12 @@
 # Currency and Language Internalization
 
-## Language Implementation
+## Changes
+
+- [x] Switch language
+- [x] Switch currency
+- [x] Choose currency in creating ad (price)
+
+### Language Implementation
 
 I used the ruby gem I18n to implement switching of languages based on user input.
 I added a dropdown link in the navigation bar with links to different languages the user can choose from.
@@ -83,7 +89,7 @@ In ad index:
 Note: You have to manually input all the strings in different languages in the yml file. Also, I included the gem devise I18n to support the languages for devise controller.
 
 
-## Currency Implementation
+### Currency Implementation
 
 To implement the support for different currencies, I used these gems:
 
