@@ -16,8 +16,6 @@
 class Ad < ApplicationRecord
   belongs_to :user
 
-  before_create :convert_price_to_cents
-
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -27,20 +25,7 @@ class Ad < ApplicationRecord
     Money.new price_cents, price_currency
   end
 
-  def price=(value)
-    value = Money.parse(value) if value.instance_of? String # otherwise assume, that value is a Money object
-
-    self[:price_cents] = value.cents
-    self[:price_currency] = value.currency_as_string
-  end
-
   def should_generate_new_friendly_id?
     title_changed?
-  end
-
-  private
-
-  def convert_price_to_cents
-    self.price = (self.price * 100)
   end
 end
