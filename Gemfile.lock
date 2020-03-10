@@ -142,6 +142,9 @@ GEM
       rubocop (~> 0.51)
       smart_properties
     erubi (1.9.0)
+    eu_central_bank (1.5.0)
+      money (~> 6.13, >= 6.13.6)
+      nokogiri (~> 1.9)
     ffi (1.12.2)
     ffi (1.12.2-java)
     ffi (1.12.2-x64-mingw32)
@@ -192,10 +195,6 @@ GEM
       money (~> 6.12)
     money (6.13.7)
       i18n (>= 0.6.4, <= 2)
-    money-currencylayer-bank (0.5.6)
-      json (>= 1.8)
-      monetize (~> 1.4)
-      money (~> 6.7)
     money-rails (1.13.3)
       activesupport (>= 3.0)
       monetize (~> 1.9.0)
@@ -390,6 +389,7 @@ DEPENDENCIES
   devise-i18n
   emoji_flag
   erb_lint
+  eu_central_bank
   flag-icons-rails
   font-awesome-sass (~> 5.11.2)
   friendly_id (~> 5.2, >= 5.2.5)
@@ -400,7 +400,6 @@ DEPENDENCIES
   json
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.9, >= 4.9.2)
-  money-currencylayer-bank
   money-rails
   multi_json
   pg (>= 0.18, < 2.0)
