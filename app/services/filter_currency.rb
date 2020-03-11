@@ -1,5 +1,5 @@
 class FilterCurrency
-  def initializer(currency_code)
+  def initialize(currency_code)
     default_currency = "USD"
     supported_currencies = %w[USD PHP EUR JPY] # Add the currencies you want supported here (currencies in the dropdown menu of the application)
 
