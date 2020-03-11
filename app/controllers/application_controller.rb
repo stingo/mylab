@@ -20,11 +20,12 @@ class ApplicationController < ActionController::Base
   def set_location
     if current_user.id.nil? || current_user.location.nil?
       if Rails.env.production?
-        @country = request.location.country
-        country_details = Country.find_country_by_name(@country)
-        # @currency = country_details.currency['code']
-        @city = request.location.city
-        @country_code = request.location.country_code
+        @country_code = request.location.country # To get client's country
+        @city = request.location.city # To get city name of the client (may remove this, for debugging only)
+        @country_details = Country.new(@country_code) # create a country object from country code to get country details
+        @country_name = @country_details.name # To get country name (may remove this, for debugging only)
+        @currency_code = @country_details.currency_code # To get currency code
+        session[:currency] = @currency_code
       end
     else
       @country = current_user.location
