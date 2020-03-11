@@ -18,10 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_location
-    if @user.nil? || @user.location.nil?
+    if current_user.id.nil? || current_user.location.nil?
       if Rails.env.production?
         @country = request.location.country
         @city = request.location.city
+        @country_code = request.location.country_code
       end
     else
       @country = @user.location
