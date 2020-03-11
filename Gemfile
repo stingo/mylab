@@ -31,7 +31,6 @@ gem "money-rails"
 gem "multi_json"
 gem "simple_form", ">= 5.0.0"
 # gem 'simple_form', '~> 3.5'
-gem "countries", require: "countries/global"
 gem "country_select", "~> 4.0"
 gem "flag-icons-rails"
 gem "impressionist", git: "https://github.com/charlotte-ruby/impressionist"
