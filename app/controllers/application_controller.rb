@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
   def set_location
     if current_user.id.nil? || current_user.location.nil?
       if Rails.env.production?
-        @country = request.location.country_name
+        @country = request.location.country
         country_details = Country.find_country_by_name(@country)
-        @currency = country_details.currency['code']
+        # @currency = country_details.currency['code']
         @city = request.location.city
         @country_code = request.location.country_code
       end
