@@ -6,6 +6,12 @@ class AdsController < ApplicationController
   # GET /ads.json
   def index
     @ads = Ad.all
+
+    if Rails.env.production?
+      @country = request.location.country
+      @city = request.location.city
+      @currency = request.currency
+    end
   end
 
   # GET /ads/1
