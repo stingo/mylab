@@ -25,9 +25,9 @@ class ApplicationController < ActionController::Base
         @country_details = Country.new(@country_code) # create a country object from country code to get country details
         @country_name = @country_details.name # To get country name (may remove this, for debugging only)
         @currency_code = @country_details.currency_code # To get currency code
-        @filtered_currency = FilterCurrency.new(@currency_code) # This calls the service object and determines whether the currency code is supported
+        # @filtered_currency = FilterCurrency.new(@currency_code) # This calls the service object and determines whether the currency code is supported
 
-        session[:currency] = @filtered_currency 
+        session[:currency] = @currency_code
       end
     else
       @country = current_user.location
@@ -43,6 +43,4 @@ class ApplicationController < ActionController::Base
   def default_url_options(_options = {})
     { locale: I18n.locale }
   end
-
-  def filter_country; end
 end
