@@ -17,6 +17,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_location
+    if @user.nil? || @user.location.nil?
+      if Rails.env.production?
+        @country = request.location.country
+        @city = request.location.city
+      end
+    else
+      @country = @user.location
+    end
+  end
+
   private
 
   def set_locale

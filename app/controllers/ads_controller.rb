@@ -1,16 +1,12 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
+  before_action :set_location, only: %i[index show create]
 
   # GET /ads
   # GET /ads.json
   def index
     @ads = Ad.all
-
-    if Rails.env.production?
-      @country = request.location.country
-      @city = request.location.city
-    end
   end
 
   # GET /ads/1
