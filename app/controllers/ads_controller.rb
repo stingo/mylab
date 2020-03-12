@@ -1,7 +1,7 @@
 class AdsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
-  before_action :set_location, only: %i[index show create]
+  before_action :set_location, only: %i[index show create new]
 
   # GET /ads
   # GET /ads.json
@@ -71,9 +71,9 @@ class AdsController < ApplicationController
       session[:currency] = params[:currency]
     else
       current_user.update(currency: params[:currency])
-      session[:set_currency] = params[:currency]
+      byebug
+      session[:set_currency] = current_user.currency
     end
-
 
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path }
