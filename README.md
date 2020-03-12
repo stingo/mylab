@@ -1,3 +1,154 @@
+# Geolocation with currency converter
+
+*Note: I added comments to the actual code in the repo for readability.*
+
+## Implementation
+ - [x] Added currency column to user model
+ - [x] Change currency based on geolocation
+ - [x] Filter the currency from geolocation (if client's currency is not supported, default to USD)
+ - [x] Persist the currency change if the user changes the location
+ - [x] Set default currency in Ad create
+
+### Add currency to user devise model
+
+I added a migration to add a column named `currency`. This is where the persisted currency code will be stored. This is default to nil.
+
+If user's currency is nil, it will base the currency on the detected location. Otherwise, it will use the persisted data to determine the currency to be used.
+
+```
+class AddLocationToUser < ActiveRecord::Migration[6.0]
+  def change
+    add_column :users, :currency, :string, default: nil, allow_nil: true
+  end
+end
+```
+
+### Change currency based on geolocation
+
+I used `geocoder` gem to get the client's country: https://github.com/alexreisner/geocoder
+
+**Note: Geocoder does not work on development environment (since no ip and only localhost). So I deployed the repo to heroku. Below is the link to it.**
+
+ 🖥 Development Link: https://mylab-geolocation-test.herokuapp.com/
+
+*I had to change the currency bank api to `eu_central_bank` since my api request to `currencylayer` has reached the max limit. I also only was able to test this on a number of countries because of the limit of my free vpn since it does not support countries in africa. But this should work regardless.*
+
+To implement this, I added a `set_currency` in ApplicationController. This is then called as a before_action on Ads controller for index, show, create.
+
+```
+  def set_currency
+    if current_user.currency.nil?
+      if Rails.env.production?
+        @country_code = request.location.country
+        @city = request.location.city
+        # @country_details = Country.new(@country_code)
+        @country_name = @country_details.name
+        @currency_code = @country_details.currency_code
+      end
+  end
+```
+
+As stated before: If user's currency is nil, it will base the currency on the geolocation. Otherwise, it will use the persisted data to determine the currency to be used.
+
+**The currency based on geolocation is not persisted. The currency will only be persisted if the user choose from the dropdown.**
+
+
+### Filter the currency from geolocation
+
+To only allow currencies that is supported by the application, I added a service object. This filters out the currency. It checks whether the currency is supported by the application, if not, it sets it to the default currency.
+
+I added a service object that will filter the currencies. Set all the currencies that will be supported by the application in `@supported_currencies`
+
+```
+class FilterCurrency
+  def initialize(currency_code)
+    @currency_code = currency_code
+    @default_currency = "USD"
+    @supported_currencies = %w[USD PHP EUR JPY]
+  end
+
+  def perform
+    return @default_currency unless @supported_currencies.include? @currency_code
+
+    @currency_code
+  end
+end
+
+```
+
+Then `set_currency` is updated to use the filter_currency service object in setting `session[:currency]`
+
+```
+def set_currency
+  if current_user.id.nil? || current_user.location.nil?
+      if Rails.env.production?
+        ...
+        @filtered_currency = FilterCurrency.new(@currency_code).perform
+
+        if session[:set_currency].nil?
+          session[:currency] = @filtered_currency
+        else
+          session[:currency] = session[:set_currency]
+        end
+      end
+    else
+      session[:currency] = if current_user.id.nil?
+                             params[:currency]
+                           else
+                             current_user.currency
+                           end
+    end
+```
+
+### Persist the currency change if the user changes the location
+
+The currency column is default set to nil. **Currency column will only have value once the user changes the currency from the dropdown menu.**
+
+The currency is only persisted if the user is logged in, otherwise, it will use the session currency.
+
+To implement this, I updated `save_currency` in ads_controller and `set_currency` in application controller.
+
+```
+  def save_currency
+    session[:set_currency] = params[:currency]
+    current_user.update(currency: params[:currency])
+
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+    end
+  end
+
+```
+
+```
+  def set_currency
+    if current_user.id.nil? || current_user.currency.nil?
+      if Rails.env.production?
+        ...
+        session[:currency] = @filtered_currency if session[:set_currency].nil?
+      end
+    else
+      session[:currency] = current_user.currency
+    end
+  end
+```
+
+### Set default currency in Ad create
+
+I updated before_action `set_currency` to include `new`. Then set a default value to currency select in ads form.
+
+```
+before_action :set_currency, only: %i[index show create new]
+```
+
+```
+<%= f.select :price_currency, [["USD- US Dollars", "USD"],
+                                 ["JPY- Japanese Yen", "JPY"],
+                                 ["PHP - Philippine Peso", "PHP"],
+                                 ["EUR - European Pound", "EUR"]],
+                                 selected: session[:currency] %>
+```
+
 # Currency and Language Internalization
 
 ## Changes
