@@ -67,9 +67,7 @@ class AdsController < ApplicationController
   end
 
   def save_currency
-    if current_user.id.nil?
-      session[:currency] = params[:currency]
-    else
+    unless current_user.id.nil?
       current_user.update(currency: params[:currency])
       session[:set_currency] = current_user.currency
     end
