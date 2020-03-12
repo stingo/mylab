@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_location
-    if current_user.id.nil? || current_user.currency.nil?
+    if current_user.currency.nil?
       if Rails.env.production?
         @country_code = request.location.country # To get client's country
         @city = request.location.city # To get city name of the client (may remove this, for debugging only)
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
         @currency_code = @country_details.currency_code # To get currency code
         @filtered_currency = FilterCurrency.new(@currency_code).perform # This calls the service object and determines whether the currency code is supported
 
-        session[:currency] = @filtered_currency if session[:set_currency].nil?
+        session[:currency] = @filtered_currency
       end
     else
       session[:currency] = current_user.currency
