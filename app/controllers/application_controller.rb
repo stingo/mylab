@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
         @currency_code = @country_details.currency_code # To get currency code
         @filtered_currency = FilterCurrency.new(@currency_code).perform # This calls the service object and determines whether the currency code is supported
 
-        session[:currency] = @filtered_currency if current_user.id.nil?
+        # session[:currency] = @filtered_currency if current_user.id.nil?
+        session[:currency] = @currency_code
       end
     else
       session[:currency] = if current_user.id.nil?
