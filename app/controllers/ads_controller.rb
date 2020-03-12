@@ -71,7 +71,6 @@ class AdsController < ApplicationController
       session[:currency] = params[:currency]
     else
       current_user.update(currency: params[:currency])
-      byebug
       session[:set_currency] = current_user.currency
     end
 
