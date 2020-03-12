@@ -67,11 +67,9 @@ class AdsController < ApplicationController
   end
 
   def save_currency
-    unless current_user.id.nil?
-      current_user.update(currency: params[:currency])
-      session[:set_currency] = current_user.currency
-    end
-
+    current_user.update(currency: params[:currency])
+    session[:set_currency] = current_user.currency
+    
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path }
     end

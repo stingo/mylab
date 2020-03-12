@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_currency
-    if current_user.currency.nil? 
+    if current_user.currency.nil?
       if Rails.env.production?
         @country_code = request.location.country # To get client's country
         @city = request.location.city # To get city name of the client (may remove this, for debugging only)
@@ -30,11 +30,11 @@ class ApplicationController < ActionController::Base
         session[:currency] = @filtered_currency
       end
     else
-      if current_user.id.nil?
-        session[:currency] = params[:currency]
-      else
-        session[:currency] = current_user.currency
-      end
+      session[:currency] = if current_user.id.nil?
+                             params[:currency]
+                           else
+                             current_user.currency
+                           end
     end
   end
 
