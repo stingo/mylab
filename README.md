@@ -41,7 +41,7 @@ To implement this, I added a `set_currency` in ApplicationController. This is th
       if Rails.env.production?
         @country_code = request.location.country
         @city = request.location.city
-        # @country_details = Country.new(@country_code)
+        @country_details = Country.new(@country_code)
         @country_name = @country_details.name
         @currency_code = @country_details.currency_code
       end
