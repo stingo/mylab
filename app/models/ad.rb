@@ -15,6 +15,7 @@
 #
 class Ad < ApplicationRecord
   belongs_to :user
+  has_one :currency
 
   extend FriendlyId
   friendly_id :title, use: :slugged
