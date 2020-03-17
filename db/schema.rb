@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_202159) do
     t.string "name"
     t.string "country"
     t.string "iso_code"
+    t.string "website"
   end
 
   create_table "users", force: :cascade do |t|

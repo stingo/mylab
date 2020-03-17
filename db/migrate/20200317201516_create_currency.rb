@@ -4,6 +4,7 @@ class CreateCurrency < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :country
       t.string :iso_code
+      t.string :website
     end
   end
 end
