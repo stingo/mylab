@@ -1,0 +1,21 @@
+
+<table class="table-bordered container mt-5">
+  <thead>
+    <th>Currency Id</th>
+    <th>Name</th>
+    <th>Country</th>
+    <th>Iso Code</th>
+    <th>Website</th>
+  </thead>
+  <tbody>
+    <% @currencies.each do |currency| %>
+      <tr>
+        <td><%= currency.id %></td>
+        <td><%= currency.name %></td>
+        <td><%= currency.country %></td>
+        <td><%= currency.iso_code %></td>
+        <td><%= currency.website %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
