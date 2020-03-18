@@ -17,10 +17,10 @@ gem "webpacker", "~> 4.0"
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "countries", require: "countries/global"
-gem 'money-currencylayer-bank'
 gem "emoji_flag"
 gem "geocoder"
 gem "jbuilder", "~> 2.7"
+gem "money-currencylayer-bank"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
