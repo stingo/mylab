@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_03_17_202159) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
-    t.bigint "currency_id"
+    t.bigint "currency_id", default: 1, null: false
     t.index ["currency_id"], name: "index_ads_on_currency_id"
   end
 
