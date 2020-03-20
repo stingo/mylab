@@ -1,6 +1,7 @@
 require "money/bank/currencylayer_bank"
 
 MoneyRails.configure do |config|
+  Money.default_currency = "USD"
   bank = Money::Bank::CurrencylayerBank.new
   bank.access_key = "749ea9046a7bd8b11d3e155d0acfdb19"
   bank.source = "USD"
