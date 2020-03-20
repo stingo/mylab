@@ -9,7 +9,6 @@ class RemoveCurrencyReferenceInAds < ActiveRecord::Migration[6.0]
 
     remove_reference :ads, :currency
   end
-
   def down
     add_reference :ads, :currency, default: 1, null: false, foreign_key: true
 
