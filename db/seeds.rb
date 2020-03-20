@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(first_name: "John", last_name: "Doe", email: "admin@admin.com", password: "password", password_confirmation: "password", username: "thisisjohndoe")
+Currency.create(name: "United States Dollar", country: "United States", iso_code: "USD", website: "www.usd-currency.com")
+Currency.create(name: "Philippines Peso", country: "Philippines", iso_code: "PHP", website: "www.php-currency.com")

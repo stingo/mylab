@@ -2,6 +2,7 @@ class AdsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show save_currency]
   before_action :set_ad, only: %i[show edit update destroy]
   before_action :set_currency, only: %i[index show create new]
+  before_action :update_currency_rate, only: [:index, :show]
 
   # GET /ads
   # GET /ads.json
@@ -85,5 +86,11 @@ class AdsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def ad_params
     params.require(:ad).permit(:title, :description, :price, :price_currency, :slug)
+  end
+
+  def update_currency_rate
+    return unless MoneyRails.default_bank.expired?
+
+    MoneyRails.default_bank.update_rates
   end
 end
