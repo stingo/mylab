@@ -161,8 +161,11 @@ end
 ```
 
 The list of currencies is in `/currencies`.
-Show view should be able to show the ads with that currency `/currency/1`:
+![image](https://user-images.githubusercontent.com/25243082/77213567-3a680600-6b46-11ea-8aaf-2877642474ab.png)
 
+Show view should be able to show the ads with that currency `/currency/1`:
+![image](https://user-images.githubusercontent.com/25243082/77213598-58ce0180-6b46-11ea-9571-af89fd54e30f.png)
+![image](https://user-images.githubusercontent.com/25243082/77213618-65525a00-6b46-11ea-95c3-5586d5ad375a.png)
 
 I think the free plan of CurrencyLayer should work alright with this one since it will only have 1-3 requests each day to the API (`update_rates`). Maybe see how many is added to the API usage once you deploy it and check it each day and see if it will exceed 250 requests each month.
 
