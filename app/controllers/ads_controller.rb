@@ -87,10 +87,4 @@ class AdsController < ApplicationController
   def ad_params
     params.require(:ad).permit(:title, :description, :price, :price_currency, :slug)
   end
-
-  def update_currency_rate
-    return unless MoneyRails.default_bank.expired?
-
-    MoneyRails.default_bank.update_rates
-  end
 end

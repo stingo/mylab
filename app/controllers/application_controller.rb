@@ -42,6 +42,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def update_currency_rate
+    return unless MoneyRails.default_bank.expired?
+
+    MoneyRails.default_bank.update_rates
+  end
+
   private
 
   def set_locale

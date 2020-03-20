@@ -17,10 +17,15 @@ class Ad < ApplicationRecord
   belongs_to :user
   has_one :currency
 
+  def self.currency_ads(currency_code)
+    where(price_currency: currency_code)
+  end
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   monetize :price_cents
+
 
   def price
     Money.new price_cents, price_currency
