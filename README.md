@@ -1,3 +1,172 @@
+# Refactor CurrencyLayer API Implementation
+
+## Changes
+- [x] Replicated the production tables
+- [x] Added caching for CurrencyLayer rates
+- [x] Removed currency reference in ads
+- [x] Added scope for currency show ads (a link_to from each Ad to currency)
+
+### Replicated production table and view
+
+I added a currency table and referenced it in ads table. These are the migrations I did
+```
+class CreateCurrency < ActiveRecord::Migration[6.0]
+  def change
+    create_table :currencies do |t|
+      t.string :name
+      t.string :country
+      t.string :iso_code
+      t.string :website
+    end
+  end
+end
+```
+```
+class AddCurrencyReferenceToAds < ActiveRecord::Migration[6.0]
+  def up
+    add_reference :ads, :currency, default: 1, null: false, foreign_key: true
+  end
+
+  def down
+    remove_reference :ads, :currency
+  end
+end
+```
+
+Then I added currency controller and view for index and show for the currency list:
+
+```
+class CurrenciesController < ApplicationController
+  def index
+    @currencies = Currency.all
+  end
+
+  def show
+    currency = Currency.find(params[:id])
+    @ads = Ad.all.currency_ads(currency.iso_code)
+  end
+end
+```
+
+Those are the migrations I did to be able to replicate your current production version
+
+### Added caching for currencylayer
+
+I modified the currencylayer implementation. I used a different gem to be able to use currencylayer.
+
+In the gemfile:
+```
+gem "money-currencylayer-bank"
+```
+
+To limit the API requests, we talked about persisting the rates, however, I think caching the returned rates by the currencylayer is a better approach. The expire time of it is 86400 seconds or 24 hours.
+
+In initialization of Money (config/initializers/money.rb):
+```
+require "money/bank/currencylayer_bank"
+
+MoneyRails.configure do |config|
+  Money.default_currency = "USD"
+  bank = Money::Bank::CurrencylayerBank.new
+  bank.access_key = "749ea9046a7bd8b11d3e155d0acfdb19"
+  bank.source = "USD"
+  bank.ttl_in_seconds = 86_400
+  bank.cache = proc do |v|
+    key = "money:currencylayer_bank"
+    if v
+      Thread.current[key] = v
+    else
+      Thread.current[key]
+    end
+  end
+
+  config.default_bank = bank
+end
+```
+
+Then I removed update of rates in AdsHelper (app/helpers/ads_helper.rb):
+```
+module AdsHelper
+  def converted_price(price)
+    if session[:currency].present?
+      humanized_money_with_symbol(Money.default_bank.exchange_with(price, session[:currency]))
+    else
+      humanized_money_with_symbol(price)
+    end
+  end
+end
+```
+I moved the rate update to application_controller in case you need it for other controllers other that ads (app/controllers/application_controller.rb):
+
+```
+def update_currency_rate
+  return unless MoneyRails.default_bank.expired?
+
+  MoneyRails.default_bank.update_rates
+end
+```
+
+Then in ads_controller, I added a before_action to update the rates in the controllers that will need rate conversions (app/controllers/ads_controller.rb):
+```
+before_action :update_currency_rate, only: [:index, :show]
+```
+
+I tested this and kept track of the API usage in currencylayer. I added ads, refereshed the pages, changed the currencies and it did not add count to the API usage. If you will check the API usage count right after deploying or running the app, you will see in the first few minutes that it is making some requests to the API since it is still initializing. But after a while, there will be no more additional API requests. I haven't tested if it will update the rates after 86,400 seconds since I have to have the development server running for a while. But this should be good to go.
+
+### Removed currency reference in ads
+
+To de-associate the currency from the ads, I created a migration that will move the `currency` column in the ad to the `price_currency` column and remove the reference currency:
+
+```
+class RemoveCurrencyReferenceInAds < ActiveRecord::Migration[6.0]
+  def up
+    ActiveRecord::Base.transaction do
+      Ad.all.each do |ad|
+        currency = Currency.find_by(id: ad.currency_id)
+        ad.update(price_currency: currency.iso_code)
+      end
+    end
+
+    remove_reference :ads, :currency
+  end
+  def down
+    add_reference :ads, :currency, default: 1, null: false, foreign_key: true
+
+    ActiveRecord::Base.transaction do
+      Ad.all.each do |ad|
+        price_currency = Currency.find_by(iso_code: ad.price_currency)
+        ad.update(currency: price_currency.id)
+      end
+    end
+  end
+end
+```
+
+This should de-associate the currency reference after moving `currency.iso_code` to `price_currency`.
+
+### Added scope for currency show ads
+
+As mentioned before, I added currency controller for the currency list and the link to currency with ads. To still link the ads to the currency table, I added a scope to ads model (app/models/ad.rb):
+```
+def self.currency_ads(currency_code)
+  where(price_currency: currency_code)
+end
+```
+In the show controller of currencies:
+```
+def show
+  currency = Currency.find(params[:id])
+  @ads = Ad.all.currency_ads(currency.iso_code)
+end
+```
+
+The list of currencies is in `/currencies`.
+Show view should be able to show the ads with that currency `/currency/1`:
+
+
+I think the free plan of CurrencyLayer should work alright with this one since it will only have 1-3 requests each day to the API (`update_rates`). Maybe see how many is added to the API usage once you deploy it and check it each day and see if it will exceed 250 requests each month.
+
+
 # Geolocation with currency converter
 
 *Note: I added comments to the actual code in the repo for readability.*
