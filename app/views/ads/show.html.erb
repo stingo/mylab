@@ -15,6 +15,10 @@
   <%= converted_price(@ad.price) %>
 </p>
 
+<p>
+  <%= link_to "Currency", currency_path(@currency) %>
+</p>
+
 <%= link_to "Edit", edit_ad_path(@ad) %>
 |
 <%= link_to "Back", ads_path %>
