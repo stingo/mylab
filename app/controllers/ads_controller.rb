@@ -12,7 +12,9 @@ class AdsController < ApplicationController
 
   # GET /ads/1
   # GET /ads/1.json
-  def show; end
+  def show
+    @currency = Currency.find_by(iso_code: @ad.price_currency)
+  end
 
   # GET /ads/new
   def new
