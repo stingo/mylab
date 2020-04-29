@@ -4,7 +4,7 @@ class CurrenciesController < ApplicationController
   end
 
   def show
-    currency = Currency.find(params[:id])
+    @currency = Currency.find(params[:id])
     @ads = Ad.all.currency_ads(currency.iso_code)
   end
 end
