@@ -5,12 +5,10 @@
     <%= f.input :email,
                 required: false,
                 autofocus: true,
-                value: "admin@admin.com",
-                input_html: { autocomplete: "email" } %>
+                input_html: { autocomplete: "email", value: "admin@admin.com" } %>
     <%= f.input :password,
                 required: false,
-                value: "password",
-                input_html: { autocomplete: "current-password" } %>
+                input_html: { autocomplete: "current-password", value: "password" } %>
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
