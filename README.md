@@ -1,8 +1,8 @@
 # Bug Fixes
 
 ## Changes
-- [x] Fix for country_code nil error
 - [x] Exclude currency dropdown of forgotten password page
+- [x] Fix for country_code nil error
 
 Deployed the changes to a new staging environment: https://upfrica-develop.herokuapp.com/
 
