@@ -18,27 +18,18 @@ class ApplicationController < ActionController::Base
   end
 
   def set_currency
-    if current_user.currency.nil?
-      if Rails.env.production?
-        @remote_ip = request.env['HTTP_X_FORWARDED_FOR']
-        @country_code = Geocoder.search(request.remote_ip).country_code # To get client's country
-        @city = request.location.city # To get city name of the client (may remove this, for debugging only)
-        @country_details = Country.new(@country_code) # Create a country object from country code to get country details
-        @country_name = @country_details.name # To get country name (may remove this, for debugging only)
-        @currency_code = @country_details.currency_code # To get currency code
-        @filtered_currency = FilterCurrency.new(@currency_code).perform # This calls the service object and determines whether the currency code is supported
+    if Rails.env.production?
+      @country_code = request.location.country_code# To get client's country
+      @city = request.location.city # To get city name of the client (may remove this, for debugging only)
+      @country_details = Country.new(@country_code) # Create a country object from country code to get country details
+      @country_name = @country_details.name # To get country name (may remove this, for debugging only)
+      @currency_code = @country_details.currency_code # To get currency code
+      @filtered_currency = FilterCurrency.new(@currency_code).perform # This calls the service object and determines whether the currency code is supported
 
-        session[:currency] = if session[:set_currency].nil?
-                               @filtered_currency
-                             else
-                               session[:set_currency]
-                             end
-      end
-    else
-      session[:currency] = if current_user.id.nil?
-                             params[:currency]
+      session[:currency] = if session[:set_currency].nil?
+                             @filtered_currency
                            else
-                             current_user.currency
+                             session[:set_currency]
                            end
     end
   end
