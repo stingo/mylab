@@ -9,3 +9,5 @@
 User.create(first_name: "John", last_name: "Doe", email: "admin@admin.com", password: "password", password_confirmation: "password", username: "thisisjohndoe")
 Currency.create(name: "United States Dollar", country: "United States", iso_code: "USD", website: "www.usd-currency.com")
 Currency.create(name: "Philippines Peso", country: "Philippines", iso_code: "PHP", website: "www.php-currency.com")
+Currency.create(name: "Japanese Yen", country: "Japan", iso_code: "JPY", website: "www.japan-currency.com")
+Currency.create(name: "Euro", country: "Italy", iso_code: "EUR", website: "www.euro-currency.com")
