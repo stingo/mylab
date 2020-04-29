@@ -2,7 +2,9 @@
 
 ## Changes
 - [x] Fix for country_code nil error
-- [ ] Exclude currency dropdown of forgotten password page
+- [x] Exclude currency dropdown of forgotten password page
+
+Deployed the changes to a new staging environment: https://upfrica-develop.herokuapp.com/
 
 ### Exclude currency dropdown of forgotten password page
 
@@ -20,8 +22,7 @@ In the nav file (/app/views/shared/guest_nav.html.erb), I updated the unless cla
   </li>
 <% end %>
 ```
-
-Should now work for forgotten password page and login.
+Should now work for forgotten password page and login. If the issue persist to other pages/controllers, just add the controller name in the conditional.
 
 ### Fix for country_code nil error
 
