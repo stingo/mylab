@@ -26,6 +26,33 @@ Should now work for forgotten password page and login. If the issue persist to o
 
 ### Fix for country_code nil error
 
+In application_controller (/app/controllers/application_controller.rb), I updated the code to the following:
+
+```
+def set_currency
+  if Rails.env.production?
+    @country_code = request.location.country_code
+    @country_details = Country.new(@country_code)
+    @currency_code = @country_details.currency_code
+    @filtered_currency = FilterCurrency.new(@currency_code).perform
+  end
+
+  if current_user.currency.nil?
+    session[:currency] = if session[:set_currency].nil?
+                           @filtered_currency
+                         else
+                           session[:set_currency]
+                         end
+  else
+    session[:currency] = if current_user.id.nil?
+                           params[:currency]
+                         else
+                           current_user.currency
+                         end
+  end
+end
+```
+
 # Refactor CurrencyLayer API Implementation
 
 ## Changes
