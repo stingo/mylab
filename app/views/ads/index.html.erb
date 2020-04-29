@@ -20,8 +20,7 @@
             <h6>User Currency: <%= session[:currency] %></h6>
             <h6>Filtered Currency: <%= @filtered_currency %></h6>
             <p>-----</p>
-            <h2>Location: <%= @location %></h2>
-            <h2>Country: <%= @location.country %></h2>
+            <h2>Location: <%= @location.inspect %></h2>
             <h2>Country: <%= @location.country_code %></h2>
             <p>****************************</p>
           </div>
