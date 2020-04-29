@@ -26,7 +26,6 @@ class Ad < ApplicationRecord
 
   monetize :price_cents
 
-
   def price
     Money.new price_cents, price_currency
   end
