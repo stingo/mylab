@@ -1,3 +1,30 @@
+# Bug Fixes
+
+## Changes
+- [x] Fix for country_code nil error
+- [ ] Exclude currency dropdown of forgotten password page
+
+### Exclude currency dropdown of forgotten password page
+
+In the nav file (/app/views/shared/guest_nav.html.erb), I updated the unless clause for currency dropdown to this:
+```
+<% unless controller_name == "sessions" || controller_name == "passwords"  %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= "#{Money.new(10, session[:currency]).symbol} #{session[:currency]}" %></a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= button_to "$ USD", { controller: "ads", action: "save_currency", currency: "USD" }, method: :post, class: "dropdown-item" %>
+      <%= button_to "₱ PHP", { controller: "ads", action: "save_currency", currency: "PHP" }, method: :post, class: "dropdown-item" %>
+      <%= button_to "¥ JPY", { controller: "ads", action: "save_currency", currency: "JPY" }, method: :post, class: "dropdown-item" %>
+      <%= button_to "€ EUR", { controller: "ads", action: "save_currency", currency: "EUR" }, method: :post, class: "dropdown-item" %>
+    </div>
+  </li>
+<% end %>
+```
+
+Should now work for forgotten password page and login.
+
+### Fix for country_code nil error
+
 # Refactor CurrencyLayer API Implementation
 
 ## Changes
