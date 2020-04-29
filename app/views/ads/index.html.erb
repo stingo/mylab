@@ -10,13 +10,19 @@
             <h4><%= t "marketplace.listing" %></h4>
 
             <p>****For debugging only****</p>
+
             <h5>User Details</h5>
             <h6>Country Name: <%= @country_name %></h6>
             <h6>Country Code: <%= @country_code %></h6>
+              <h6>Country Code: <%= @country_code %></h6>
             <h6>City: <%= @city %></h6>
             <h6>Currency Code: <%= @currency_code %></h6>
             <h6>User Currency: <%= session[:currency] %></h6>
             <h6>Filtered Currency: <%= @filtered_currency %></h6>
+            <p>-----</p>
+            <h2>Location: <%= @location %></h2>
+            <h2>Country: <%= @location.country %></h2>
+            <h2>Country: <%= @location.country_code %></h2>
             <p>****************************</p>
           </div>
         </div>

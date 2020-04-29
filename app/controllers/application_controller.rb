@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   def set_currency
     if current_user.currency.nil?
       if Rails.env.production?
+        @location = request.location
         @country_code = request.location.country # To get client's country
         @city = request.location.city # To get city name of the client (may remove this, for debugging only)
         @country_details = Country.new(@country_code) # Create a country object from country code to get country details
