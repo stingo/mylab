@@ -25,6 +25,7 @@ class Ad < ApplicationRecord
   friendly_id :title, use: :slugged
 
   monetize :price_cents
+  monetize :delivery_cents
 
   def price
     Money.new price_cents, price_currency
