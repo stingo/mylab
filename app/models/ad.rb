@@ -16,6 +16,9 @@
 class Ad < ApplicationRecord
   belongs_to :user
   has_one :currency
+  before_create :convert_cents_to_money
+
+  validates_with CurrencyValidator
 
   def self.currency_ads(currency_code)
     where(price_currency: currency_code)
@@ -31,7 +34,20 @@ class Ad < ApplicationRecord
     Money.new price_cents, price_currency
   end
 
+  def delivery
+    Money.new delivery_cents, delivery_currency
+  end
+
   def should_generate_new_friendly_id?
     title_changed?
+  end
+
+  private
+
+  def convert_cents_to_money
+    Ad.update(
+      price_cents: price_cents.to_money.cents,
+      delivery_cents: delivery_cents.to_money.cents
+    )
   end
 end
