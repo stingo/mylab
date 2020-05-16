@@ -14,7 +14,7 @@ end
 
 ## Monetize delivery
 
-Make sure to add monetize delivery to Ad model and delivery_fee money method.
+Make sure to add monetize delivery to Ad model and delivery money method.
 
 ```
 class Ad < ApplicationRecord
@@ -31,7 +31,7 @@ end
 
 ## Ad form
 
-Add input delivery with Money.delivery_fee (method from above ^^)
+Add input delivery with Money.delivery (method from above ^^)
 
 ```
 <div class="form-inputs">
