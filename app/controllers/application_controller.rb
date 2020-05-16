@@ -25,19 +25,19 @@ class ApplicationController < ActionController::Base
       @filtered_currency = FilterCurrency.new(@currency_code).perform
     end
 
-    if current_user.currency.nil?
-      session[:currency] = if session[:set_currency].nil?
+    session[:currency] = if current_user.currency.nil?
+                           if session[:set_currency].nil?
                              @filtered_currency
                            else
                              session[:set_currency]
-                           end
-    else
-      session[:currency] = if current_user.id.nil?
+                                                end
+                         else
+                           if current_user.id.nil?
                              params[:currency]
                            else
                              current_user.currency
-                           end
-    end
+                                                end
+                         end
   end
 
   def update_currency_rate
