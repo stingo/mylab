@@ -16,9 +16,20 @@
 </p>
 
 <p>
+  <strong>Delivery:</strong>
+  <%= converted_price(@ad.delivery) %>
+</p>
+
+<p>
   <%= link_to "Currency", currency_path(@currency) %>
 </p>
 
 <%= link_to "Edit", edit_ad_path(@ad) %>
 |
 <%= link_to "Back", ads_path %>
+
+
+
+<p style="margin-bottom:2px; margin-top:20px;">***************************************************</p>
+ <%= @ad.inspect %>
+<p>***************************************************</p>
