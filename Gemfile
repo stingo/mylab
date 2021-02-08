@@ -35,7 +35,7 @@ gem "country_select", "~> 4.0"
 gem "flag-icons-rails"
 gem "impressionist", git: "https://github.com/charlotte-ruby/impressionist"
 # gem 'font-awesome-rails' # Font-awesome icon
-gem "carrierwave", "~> 2.0"
+gem "carrierwave", "~> 2.1"
 gem "devise-bootstrapped", github: "excid3/devise-bootstrapped", branch: "bootstrap4"
 gem "devise-i18n"
 gem "font-awesome-sass", "~> 5.11.2"
